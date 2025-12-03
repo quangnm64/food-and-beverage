@@ -1,10 +1,10 @@
-import type Metadata  from "next";
 import ThemeRegistry from "@/components/ThemeRegistry/ThemeRegistry";
 import Navbar from "@/components/Layout/Navbar";
 import Box from "@mui/material/Box";
 import { AuthProvider } from "@/context/AuthContext";
 import { OrderProvider } from "@/context/OrderContext";
 import Footer from "@/components/Footer";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "FANDB - Premium F&B Experience",
