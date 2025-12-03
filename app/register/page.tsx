@@ -12,7 +12,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
-export default function RegisterPage() {
+function RegisterForm() {
     const { register } = useAuth();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -90,4 +90,10 @@ export default function RegisterPage() {
             </Container>
         </Suspense>
     );
+}
+
+export default function RegisterPage() {
+    <Suspense fallback={<div style={{ height: '100vh', display: 'grid', placeItems: 'center' }}>Đang tải...</div>}>
+      <RegisterForm />
+    </Suspense>
 }

@@ -12,7 +12,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
-export default function LoginPage() {
+function LoginForm() {
     const { login } = useAuth();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -29,56 +29,62 @@ export default function LoginPage() {
     };
 
     return (
-        <Suspense fallback={<div>Đang tải...</div>}>
-            <Container maxWidth="sm" sx={{ py: 12 }}>
-                <Paper sx={{ p: 4, borderRadius: 2, boxShadow: 3 }}>
-                    <Typography
-                        variant="h4"
-                        component="h1"
-                        align="center"
-                        sx={{ mb: 4, fontFamily: 'Playfair Display', fontWeight: 700 }}
+        <Container maxWidth="sm" sx={{ py: 12 }}>
+            <Paper sx={{ p: 4, borderRadius: 2, boxShadow: 3 }}>
+                <Typography
+                    variant="h4"
+                    component="h1"
+                    align="center"
+                    sx={{ mb: 4, fontFamily: 'Playfair Display', fontWeight: 700 }}
+                >
+                    Login
+                </Typography>
+                <Box component="form" onSubmit={handleSubmit}>
+                    <TextField
+                        fullWidth
+                        label="Email Address"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        margin="normal"
+                        required
+                    />
+                    <TextField
+                        fullWidth
+                        label="Password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        margin="normal"
+                        required
+                    />
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        fullWidth
+                        size="large"
+                        sx={{ mt: 4, mb: 2, py: 1.5 }}
                     >
                         Login
-                    </Typography>
-                    <Box component="form" onSubmit={handleSubmit}>
-                        <TextField
-                            fullWidth
-                            label="Email Address"
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            margin="normal"
-                            required
-                        />
-                        <TextField
-                            fullWidth
-                            label="Password"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            margin="normal"
-                            required
-                        />
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            fullWidth
-                            size="large"
-                            sx={{ mt: 4, mb: 2, py: 1.5 }}
-                        >
-                            Login
-                        </Button>
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Typography variant="body2" color="text.secondary">
-                                Dont have an account?
-                                <Link href={`/register?redirect=${redirect}`} style={{ color: '#FF5722', textDecoration: 'none', fontWeight: 600 }}>
-                                    Register
-                                </Link>
-                            </Typography>
-                        </Box>
+                    </Button>
+                    <Box sx={{ textAlign: 'center' }}>
+                        <Typography variant="body2" color="text.secondary">
+                            Dont have an account?
+                            <Link href={`/register?redirect=${redirect}`} style={{ color: '#FF5722', textDecoration: 'none', fontWeight: 600 }}>
+                                Register
+                            </Link>
+                        </Typography>
                     </Box>
-                </Paper>
-            </Container>
-        </Suspense>
+                </Box>
+            </Paper>
+        </Container>
     );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div style={{ height: '100vh', display: 'grid', placeItems: 'center' }}>Đang tải...</div>}>
+      <LoginForm />
+    </Suspense>
+  );
 }
